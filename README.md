@@ -12,7 +12,7 @@ run on an Arduino UNO: https://github.com/MaximIntegratedRefDesTeam/RD117_ARDUIN
 
 ## Setup
 A couple non-standard Python libraries are required: `smbus` and `numpy`. I recommend
-installing the `numpy` library with apt as oposed to pip since pip takes a really
+installing the `numpy` library with apt as opposed to pip since pip takes a really
 long time.
 `sudo apt install python-numpy`
 
