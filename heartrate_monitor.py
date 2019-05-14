@@ -15,8 +15,6 @@ class HeartRateMonitor(object):
 
     def __init__(self):
         self.bpm = 0
-        self._thread = threading.Thread(target=self.run_sensor)
-        self._thread.stopped = True
 
     def run_sensor(self):
         sensor = MAX30102()
@@ -58,9 +56,11 @@ class HeartRateMonitor(object):
         sensor.shutdown()
 
     def start_sensor(self):
+        self._thread = threading.Thread(target=self.run_sensor)
         self._thread.stopped = False
         self._thread.start()
 
-    def stop_sensor(self):
+    def stop_sensor(self, timeout=2.0):
         self._thread.stopped = True
         self.bpm = 0
+        self._thread.join(timeout)
