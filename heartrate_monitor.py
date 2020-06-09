@@ -13,8 +13,12 @@ class HeartRateMonitor(object):
 
     LOOP_TIME = 0.01
 
-    def __init__(self):
+    def __init__(self, print_raw=False, print_result=False):
         self.bpm = 0
+        if print_raw is True:
+            print('IR, Red')
+        self.print_raw = print_raw
+        self.print_result = print_result
 
     def run_sensor(self):
         sensor = MAX30102()
@@ -33,7 +37,8 @@ class HeartRateMonitor(object):
                     num_bytes -= 1
                     ir_data.append(ir)
                     red_data.append(red)
-                    #print("IR: {0}, Red: {1}".format(ir, red))
+                    if self.print_raw:
+                        print("{0}, {1}".format(ir, red))
 
                 while len(ir_data) > 100:
                     ir_data.pop(0)
@@ -48,8 +53,10 @@ class HeartRateMonitor(object):
                         self.bpm = np.mean(bpms)
                         if (np.mean(ir_data) < 50000 and np.mean(red_data) < 50000):
                             self.bpm = 0
-                            #print("Finger not detected")
-                        #print("BPM: {0}, SpO2: {1}".format(self.bpm, spo2))
+                            if self.print_result:
+                                print("Finger not detected")
+                        if self.print_result:
+                            print("BPM: {0}, SpO2: {1}".format(self.bpm, spo2))
 
             time.sleep(self.LOOP_TIME)
 
