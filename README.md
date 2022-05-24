@@ -1,5 +1,6 @@
 # max30102
 MAX30102 Pulse Oximetry Sensor code for Raspberry Pi
+`git clone git@github.com:fnespinoza/max30102-python.git`
 
 ## Info
 The code originally comes from: https://github.com/vrano714/max30102-tutorial-raspberrypi
