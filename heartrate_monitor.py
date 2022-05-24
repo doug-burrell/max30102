@@ -1,10 +1,9 @@
-
 from max30102 import MAX30102
 import hrcalc
 import threading
 import time
 import numpy as np
-
+from matplotlib import pyplot as plt
 
 class HeartRateMonitor(object):
     """
@@ -46,6 +45,11 @@ class HeartRateMonitor(object):
 
                 if len(ir_data) == 100:
                     bpm, valid_bpm, spo2, valid_spo2 = hrcalc.calc_hr_and_spo2(ir_data, red_data)
+#                     print('ir_data: '+str(ir_data)+'red_data: '+str(red_data))
+#                     plt.plot(ir_data) # test
+#                     plt.plot(red_data)
+#                     plt.show()
+                    
                     if valid_bpm:
                         bpms.append(bpm)
                         while len(bpms) > 4:
@@ -71,3 +75,5 @@ class HeartRateMonitor(object):
         self._thread.stopped = True
         self.bpm = 0
         self._thread.join(timeout)
+
+

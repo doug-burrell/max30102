@@ -35,7 +35,7 @@ def calc_hr_and_spo2(ir_data, red_data):
     n_th = 60 if n_th > 60 else n_th  # max allowed
 
     ir_valley_locs, n_peaks = find_peaks(x, BUFFER_SIZE, n_th, 4, 15)
-    print(ir_valley_locs[:n_peaks], ",", end="")
+#     print(ir_valley_locs[:n_peaks], ",", end="")
     peak_interval_sum = 0
     if n_peaks >= 2:
         for i in range(1, n_peaks):
