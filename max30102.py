@@ -1,6 +1,6 @@
 # -*-coding:utf-8-*-
 
-# this code is currently for python 2.7
+# this code is currently for python 3.X
 from __future__ import print_function
 from time import sleep
 import smbus
