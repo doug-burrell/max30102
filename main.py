@@ -27,9 +27,8 @@ hrm.stop_sensor()
 print('sensor stopped!')
 
 ## plot
-# df_raw = pd.read_csv('raw_values.csv')
-# plt.plot(df_raw)
-# df_final = pd.read_csv('final_values.csv')
-# plt.plot(df_final)
-
-# plt.show()
+df_raw = pd.read_csv('raw_values.csv')
+plt.plot(df_raw)
+df_final = pd.read_csv('final_values.csv')
+plt.plot(df_final)
+plt.show()
