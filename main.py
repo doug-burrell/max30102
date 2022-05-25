@@ -3,17 +3,7 @@ from heartrate_monitor import HeartRateMonitor
 import time
 import argparse
 
-# graph
-import dash
-from dash import html
-from dash import dcc
-from dash.dependencies import Input, Output
-import pandas as pd
-import plotly.express as px
-
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 parser = argparse.ArgumentParser(description="Read and print data from MAX30102")
 parser.add_argument("-r", "--raw", action="store_true",
@@ -35,4 +25,4 @@ except KeyboardInterrupt:
     print('keyboard interrupt detected, exiting...')
 
 hrm.stop_sensor()
-print('sensor stoped!')
+print('sensor stopped!')
