@@ -1,8 +1,20 @@
 from heartrate_monitor import HeartRateMonitor
 import time
 import argparse
+import dash
+
+from dash import html
+from dash import dcc
+from dash.dependencies import Input, Output
+import pandas as pd
+import plotly.express as px
+import matplotlib.pyplot as plt
+
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
 
 parser = argparse.ArgumentParser(description="Read and print data from MAX30102")
 parser.add_argument("-r", "--raw", action="store_true",
@@ -20,5 +32,14 @@ try:
 except KeyboardInterrupt:
     print('keyboard interrupt detected, exiting...')
 
+
 hrm.stop_sensor()
 print('sensor stopped!')
+
+## plot
+# df_raw = pd.read_csv('raw_values.csv')
+# plt.plot(df_raw)
+df_final = pd.read_csv('final_values.csv')
+plt.plot(df_final)
+
+plt.show()

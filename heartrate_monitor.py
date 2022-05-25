@@ -4,14 +4,15 @@ import threading
 import time
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 
 # graph
-import dash
-from dash import html
-from dash import dcc
-from dash.dependencies import Input, Output
-import pandas as pd
-import plotly.express as px
+# import dash
+# from dash import html
+# from dash import dcc
+# from dash.dependencies import Input, Output
+# import pandas as pd
+# import plotly.express as px
 
 
 class HeartRateMonitor(object):
@@ -29,9 +30,14 @@ class HeartRateMonitor(object):
         self.print_result = print_result
 
     def run_sensor(self):
-#         external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-# 
-#         app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+        raw_headers = ['ir_data','red_data']
+        raw_file = 'raw_values.csv'
+        raw_vals = []
+        
+        final_headers = ['bpm','spo2']
+        final_file = 'final_values.csv'
+        final_vals = []
+        
         
         sensor = MAX30102()
         ir_data = []
@@ -63,15 +69,8 @@ class HeartRateMonitor(object):
 
                 if len(ir_data) == 100:
                     bpm, valid_bpm, spo2, valid_spo2 = hrcalc.calc_hr_and_spo2(ir_data, red_data)
-                    
-#                     plt.plot(ir_data)
-#                     plt.plot(red_data)
-#                     plt.show()
-#                     plt.pause(0.0001)
-#                     res_ir_data.append(ir_data)
-#                     res_red_data.append(red_data)
-                    
-                    
+                    raw = {"ir_data": np.mean(ir_data), "red_data": np.mean(red_data)}
+                    raw_vals.append(raw)               
                     
                     if valid_bpm:
                         bpms.append(bpm)
@@ -84,10 +83,22 @@ class HeartRateMonitor(object):
                                 print("Finger not detected")
                         if self.print_result:
                             print("BPM: {0}, SpO2: {1}".format(self.bpm, spo2))
-                            # Data en DB
-
+                            if self.bpm != -999:
+                                final = {"bpm": self.bpm, "spo2": spo2}
+                                final_vals.append(final)
+            
             time.sleep(self.LOOP_TIME)
-
+        
+        with open(raw_file,'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames = raw_headers)
+            writer.writeheader()
+            writer.writerows(raw_vals)
+        
+        with open(final_file,'w') as csvfile:
+            writerf = csv.DictWriter(csvfile, fieldnames = final_headers)
+            writerf.writeheader()
+            writerf.writerows(final_vals)
+        
         sensor.shutdown()
 #     @app.callback(Output('live-graph', 'figure'),[ Input('graph-update', 'n_intervals') ]
 # 
