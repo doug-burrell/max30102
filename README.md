@@ -1,6 +1,5 @@
 # max30102
 MAX30102 Pulse Oximetry Sensor code for Raspberry Pi
-`git clone git@github.com:fnespinoza/max30102-python.git`
 
 ## Info
 The code originally comes from: https://github.com/vrano714/max30102-tutorial-raspberrypi
@@ -25,14 +24,13 @@ The full usage:
 
 ```
 $ python main.py -h
-usage: main.py [-h] [-r] [-t TIME]
+usage: main.py [-h] [-r]
 
 Read and print data from MAX30102
 
 optional arguments:
   -h, --help            show this help message and exit
-  -r, --raw             print raw data instead of calculation result
-  -t TIME, --time TIME  duration in seconds to read from sensor, default 30
+  -r, --raw             print raw data instead of 
 ```
 
 ## Use as a library

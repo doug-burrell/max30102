@@ -6,15 +6,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
-# graph
-# import dash
-# from dash import html
-# from dash import dcc
-# from dash.dependencies import Input, Output
-# import pandas as pd
-# import plotly.express as px
-
-
 class HeartRateMonitor(object):
     """
     A class that encapsulates the max30102 device into a thread
@@ -43,11 +34,6 @@ class HeartRateMonitor(object):
         ir_data = []
         red_data = []
         bpms = []
-#         
-#         res_ir_data = []
-#         res_red_data = []
-#         res_bpm = []
-#         res_spo = []
 
         # run until told to stop
         while not self._thread.stopped:
@@ -100,23 +86,7 @@ class HeartRateMonitor(object):
             writerf.writerows(final_vals)
         
         sensor.shutdown()
-#     @app.callback(Output('live-graph', 'figure'),[ Input('graph-update', 'n_intervals') ]
-# 
-# 
-#     def update_graph_scatter(n):
-#         X.append(X[-1]+1)
-#         Y.append(Y[-1]+Y[-1] * random.uniform(-0.1,0.1))
-# 
-#         data = plotly.graph_objs.Scatter(
-#                 x=list(X),
-#                 y=list(Y),
-#                 name='Scatter',
-#                 mode= 'lines+markers'
-#         )
-# 
-#         return {'data': [data],
-#                 'layout' : go.Layout(xaxis=dict(range=[min(X),max(X)]),yaxis = dict(range = [min(Y),max(Y)]),)}
-    
+
     def start_sensor(self):
         self._thread = threading.Thread(target=self.run_sensor)
         self._thread.stopped = False
