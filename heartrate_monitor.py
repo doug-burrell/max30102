@@ -3,7 +3,14 @@ import hrcalc
 import threading
 import time
 import numpy as np
-from matplotlib import pyplot as plt
+
+# graph
+import dash
+from dash import html
+from dash import dcc
+from dash.dependencies import Input, Output
+import pandas as pd
+import plotly.express as px
 
 class HeartRateMonitor(object):
     """
@@ -61,6 +68,7 @@ class HeartRateMonitor(object):
                                 print("Finger not detected")
                         if self.print_result:
                             print("BPM: {0}, SpO2: {1}".format(self.bpm, spo2))
+                            # Data en DB
 
             time.sleep(self.LOOP_TIME)
 
