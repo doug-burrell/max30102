@@ -1,4 +1,3 @@
-# sensor
 from heartrate_monitor import HeartRateMonitor
 import time
 import argparse
@@ -15,9 +14,6 @@ args = parser.parse_args()
 print('sensor starting...')
 hrm = HeartRateMonitor(print_raw=args.raw, print_result=(not args.raw))
 hrm.start_sensor()
-print(hrm) # test
-
-df_bar = pd.DataFrame()
 
 try:
     time.sleep(args.time)
