@@ -83,7 +83,7 @@ class HeartRateMonitor(object):
                                 print("Finger not detected")
                         if self.print_result:
                             print("BPM: {0}, SpO2: {1}".format(self.bpm, spo2))
-                            if self.bpm != -999:
+                            if (self.bpm != -999) and (spo2 != -999):
                                 final = {"bpm": self.bpm, "spo2": spo2}
                                 final_vals.append(final)
             
